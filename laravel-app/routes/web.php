@@ -11,8 +11,18 @@
 |
 */
 
+use App\Http\Controllers\ProdutosController;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/produtos', 'ProdutosController@index');
+
+Route::get('/produtos/create', function () {
+    return view('produtos/create');
+});
+
+
 
 
