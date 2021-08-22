@@ -48,4 +48,19 @@ class ProdutosController extends Controller
         return redirect()->route('produtos.index');
         
     }
+
+    // Retornar o produto que foi solicitado na rota WEB via ID:
+    public function show($id)
+    {
+        $produto = Produtos::findOrFail($id);
+        return view('produtos/showProduct')->with('produto', $produto);
+    }
+
+    public function destroy(Request $request)
+    {
+        $delete = Produtos::destroy($request->id);
+        return redirect()->route('produtos.index');
+
+
+    }
 }

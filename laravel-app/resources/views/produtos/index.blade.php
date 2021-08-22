@@ -41,7 +41,15 @@
                         <td>{{$produto->description}}</td>
                         <td>R${{number_format($produto->price, 2,',','.')}} <!--FORMATA O VALOR INSERIDO ADICIONANDO , E . --></td>
                         <td>{{$produto->quantity}}</td>
-                        <td><button class='btn btn-warning'> Editar </button><button class='btn btn-danger'> Deletar </button>
+                        <td>
+                            <form action="/produtos/delete" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$produto->id}}">
+                                <button class="btn btn-danger" type="submit">Deletar</button>
+
+                            </form>
+                        </td>
+                        <td><a class='btn btn-warning'> Editar </a>
                       </tr>
             @endforeach    
             

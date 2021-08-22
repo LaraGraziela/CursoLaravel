@@ -32,5 +32,11 @@ Route::post('/produtos/store', [ProdutosController::class, 'store'])->name('prod
 
 Route::get('/produtos/index', [ProdutosController::class, 'index'])->name('produtos.index');
 
+// Mostrar um produto pelo ID
+Route::get('/produtos/{id}', [ProdutosController::class, 'show'])->name('produtos.findOne');
+
+// Deletar pelo ID
+Route::post('/produtos/delete', [ProdutosController::class, 'destroy'])->name('produto.delete');
+
 
 
