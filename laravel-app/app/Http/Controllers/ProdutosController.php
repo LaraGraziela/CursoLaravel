@@ -36,13 +36,8 @@ class ProdutosController extends Controller
 
     public function store(Request $request) //Receber os dados da requisição para que possa usar
     {   
-
-
-        $product = Produtos::findOrFail($request->name);
-        dd($product);
         
-        
-        //$newProduct = Produtos::create($request->all()); //Passando os produtos que forem cadastrados via form(create) para a variável $request
+        $newProduct = Produtos::create($request->all()); //Passando os produtos que forem cadastrados via form(create) para a variável $request
             /*
             Caso seja para a API, usar o retorno:
             $return = [
@@ -58,7 +53,7 @@ class ProdutosController extends Controller
 
         //return response()->json($return);
 
-        //return redirect()->route('produtos.index');
+        return redirect()->route('produtos.index');
         
     }
 
