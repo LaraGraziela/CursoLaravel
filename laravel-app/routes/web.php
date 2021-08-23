@@ -38,5 +38,8 @@ Route::get('/produtos/{id}', [ProdutosController::class, 'show'])->name('produto
 // Deletar pelo ID
 Route::post('/produtos/delete', [ProdutosController::class, 'destroy'])->name('produto.delete');
 
+// Atualizar pelo ID
+Route::post('/produtos/update', [ProdutosController::class, 'update'])->name('produto.update');
+
 
 

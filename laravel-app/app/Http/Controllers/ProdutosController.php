@@ -56,6 +56,12 @@ class ProdutosController extends Controller
         return view('produtos/showProduct')->with('produto', $produto);
     }
 
+    public function update(Request $request, $id)
+    {
+        $produtoUpdated = Produtos::updated($request->all());
+        return redirect()->route('produtos.index')->with('produto', $produtoUpdated);
+    }
+
     public function destroy(Request $request)
     {
         $delete = Produtos::destroy($request->id);

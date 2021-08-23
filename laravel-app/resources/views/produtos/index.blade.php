@@ -49,7 +49,7 @@
 
                             </form>
                         </td>
-                        <td><a class='btn btn-warning'> Editar </a>
+                        <td><a href="" class='btn btn-warning'> Editar </a>
                       </tr>
             @endforeach    
             
