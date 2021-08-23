@@ -16,26 +16,23 @@
 
         <a href="{{route('produtos.create')}}" class="btn btn-success">Cadastrar Produto</a>
         <table class="table table-bordered">
-        <?php
-            //Posso colocar aqui os itens da function index() do controller (HTML);
-            if(!empty($produtos)){
-                echo "<thead>
-                            <tr>
-                            <th>Nome</th>
-                            <th>Marca</th>
-                            <th>Descrição</th>
-                            <th>Preço</th>
-                            <th>Quantidade</th>
-                            <th>Opções</th>
-                        </tr>
-                    </thead>";
-            }        
-        ?>
-          
+       
+            @if($produtos)  
+            <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Marca</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+            @endif 
             <tbody>
             
-            @foreach($produtos as $produto)
-                <tr>
+                @foreach($produtos as $produto)
+                    <tr>
                         <td>{{$produto->name}}</td>
                         <td>{{$produto->brand}}</td>
                         <td>{{$produto->description}}</td>
@@ -48,23 +45,18 @@
                                 <button class="btn btn-danger" type="submit">Deletar</button>
 
                             </form>
+                            <form action="/produtos/update" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$produto->id}}">
+                                <button class="btn btn-warning" type="submit">Editar</button>
+
+                            </form>
                         </td>
-                        <td><a href="" class='btn btn-warning'> Editar </a>
-                      </tr>
-            @endforeach    
-            
-        
-        
-        
-       
+                    </tr>
+                @endforeach    
             </tbody>
         </table>
-    </div>
-
-
-              
-
-    
+    </div>   
 </body>
 </html>
 

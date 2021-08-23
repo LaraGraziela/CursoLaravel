@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Produtos;
+use Exception;
 
 class ProdutosController extends Controller
 {
@@ -34,18 +35,30 @@ class ProdutosController extends Controller
     }
 
     public function store(Request $request) //Receber os dados da requisição para que possa usar
-    {
-        Produtos::create($request->all()); //Passando os produtos que forem cadastrados via form(create) para a variável $request
+    {   
+
+
+        $product = Produtos::findOrFail($request->name);
+        dd($product);
+        
+        
+        //$newProduct = Produtos::create($request->all()); //Passando os produtos que forem cadastrados via form(create) para a variável $request
             /*
             Caso seja para a API, usar o retorno:
             $return = [
             'message' => 'Cadastrado com sucesso!',
 
-        ];
+            ];
+        */ 
+        
+        // Retornar isso caso exista um produto com o mesmo nome
+        /*if(!$newProduct){
+            throw new Exception('Não foi possível cadastrar o produto! Nome duplicado.');
+        }*/
 
-        return response()->json($return);*/
+        //return response()->json($return);
 
-        return redirect()->route('produtos.index');
+        //return redirect()->route('produtos.index');
         
     }
 
@@ -56,17 +69,33 @@ class ProdutosController extends Controller
         return view('produtos/showProduct')->with('produto', $produto);
     }
 
-    public function update(Request $request, $id)
+    public function updated(Request $request)
     {
-        $produtoUpdated = Produtos::updated($request->all());
-        return redirect()->route('produtos.index')->with('produto', $produtoUpdated);
+        //Encontrando os itens daquele id:
+        $updated = Produtos::find($request->id);
+        $updated->update($request->all());
+
+        $allProducts = Produtos::all();
+        return view('produtos/index')->with('produtos', $allProducts);
+        
+        //$produtoUpdated = Produtos::updated($request->all());
+        //return redirect()->route('produtos.index')->with('produto', $produtoUpdated);
+    }
+
+    // Função que pega os dados pelo id para editar:
+    // Resquest serve pra pegar todos os campos que vem do formulário
+    public function updateForm(Request $request)
+    {
+        // $produto vai receber uma consulta de acordo com o ID:
+        $produto = Produtos::findOrFail($request->id);
+        //dd($produto);
+        return view('produtos/update')->with('produto', $produto);
+        
     }
 
     public function destroy(Request $request)
     {
         $delete = Produtos::destroy($request->id);
         return redirect()->route('produtos.index');
-
-
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Produtos extends Migration
+class CreateClientPremiaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class Produtos extends Migration
      */
     public function up()
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('client_premia', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->string('brand');
-            $table->string('description');
-            $table->string('price');
-            $table->string('quantity');
+            $table->bigInteger('user_id');
+            $table->string('cpf');
+
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class Produtos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('client_premia');
     }
 }
